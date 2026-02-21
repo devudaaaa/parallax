@@ -1,0 +1,197 @@
+# ═══════════════════════════════════════════════
+# Parallax Configuration
+# A generative agent of one — devudaaaa research lab
+# ═══════════════════════════════════════════════
+
+twin:
+  name: "Ade"
+  version: "2.0"
+  description: "Generative agent for studying human decision-making"
+
+  # Personality parameters (replaces original 10K neural net params)
+  personality:
+    communication_style: "analytical-yet-warm"
+    humor_level: 0.7          # self-aware humor, not dry
+    formality_range: [0.3, 0.8]  # adapts by context
+    cultural_context: "Telugu heritage, scientific mindset"
+    languages: ["english", "telugu"]
+    
+  # Decision-making parameters (replaces PROLOG logic)
+  reasoning:
+    # Research threshold: "if probability < 45%, my intellect won't agree"
+    logic_threshold: 0.45
+    decision_framework: "game_theory"
+    argumentation_style: "evidence_based"
+    # When twin encounters sub-threshold decisions, it logs them
+    # for Phase 3 divergence analysis
+    log_uncertain_decisions: true
+
+# ── Data Pipeline Configuration ─────────────────
+pipeline:
+  # Supported data sources
+  sources:
+    messages:
+      - type: "slack_export"
+        format: "json"
+        path: "./data/raw/slack/"
+      - type: "whatsapp_export"
+        format: "txt"
+        path: "./data/raw/whatsapp/"
+      - type: "discord_export"
+        format: "json"
+        path: "./data/raw/discord/"
+      - type: "keybase_export"
+        format: "json"
+        path: "./data/raw/keybase/"
+    
+    documents:
+      - type: "pdf"
+        path: "./data/raw/documents/pdfs/"
+      - type: "docx"
+        path: "./data/raw/documents/docs/"
+      - type: "markdown"
+        path: "./data/raw/documents/notes/"
+      - type: "code"
+        path: "./data/raw/documents/code/"
+        extensions: [".py", ".pl", ".js", ".html"]
+    
+    photos:
+      - type: "images"
+        path: "./data/raw/photos/"
+        extensions: [".jpg", ".jpeg", ".png", ".webp"]
+        # Use vision model to generate descriptions
+        generate_descriptions: true
+
+  # Processing settings
+  processing:
+    chunk_size: 512           # tokens per chunk for embedding
+    chunk_overlap: 64         # overlap between chunks
+    min_chunk_size: 50        # skip very short chunks
+    batch_size: 100           # embeddings per batch
+    
+  # Embedding settings
+  embeddings:
+    model: "all-MiniLM-L6-v2"
+    dimension: 384
+    normalize: true
+
+# ── Authorization Tiers (replaces REGO/ABAC) ────
+authorization:
+  tiers:
+    public:
+      description: "General knowledge, professional info, public opinions"
+      allowed_categories: ["professional", "public_opinions", "general_knowledge"]
+    
+    friends:
+      description: "Personal preferences, stories, daily life"
+      allowed_categories: ["professional", "public_opinions", "general_knowledge",
+                          "personal_stories", "preferences", "daily_life"]
+    
+    close:
+      description: "Deep personal thoughts, vulnerabilities, private decisions"
+      allowed_categories: ["professional", "public_opinions", "general_knowledge",
+                          "personal_stories", "preferences", "daily_life",
+                          "deep_thoughts", "vulnerabilities", "private_decisions"]
+    
+    private:
+      description: "Everything — full twin access"
+      allowed_categories: ["*"]
+
+  # Default classification for untagged data
+  default_tier: "friends"
+  
+  # Categories that are NEVER shared regardless of tier
+  restricted:
+    - "financial_credentials"
+    - "passwords"
+    - "medical_records_raw"
+    - "other_peoples_secrets"
+
+# ── Platform Configuration ──────────────────────
+platform:
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    cors_origins: ["http://localhost:3000", "https://devudaaaa.xyz"]
+    rate_limit: 60  # requests per minute
+  
+  dashboard:
+    port: 3000
+    theme: "devudaaaa"  # matches website aesthetic
+  
+  connectors:
+    slack:
+      enabled: false
+      response_delay: [1, 5]  # seconds, to feel human
+      similarity_target: 0.85  # up from original 55-65%
+    discord:
+      enabled: false
+    webhook:
+      enabled: true
+      endpoint: "/api/v1/webhook"
+
+# ── Divergence Tracking (Phase 3 Infrastructure) ─
+divergence:
+  enabled: true
+  # Track every decision the twin makes
+  log_all_decisions: true
+  # Flag decisions where confidence < threshold
+  faith_threshold: 0.45
+  # Categories of decisions to track
+  categories:
+    - "daily_choices"
+    - "professional_decisions"
+    - "social_interactions"
+    - "risk_assessments"
+    - "ethical_dilemmas"
+    - "creative_choices"
+  # Storage for Phase 3 analysis
+  storage:
+    type: "sqlite"
+    path: "./data/decisions/divergence.db"
+
+# ── Temporal Engine (GTRBAC Clock) ─────────────────
+# Based on Bertino et al. (1998) periodic expressions
+# and GTRBAC model (Joshi et al., 2005)
+# As researched at AIT: Temporal Extension for RBAC
+temporal:
+  # τ (tau) — engine tick interval in seconds
+  # "We choose to run the engine every 1 minute" — AIT research
+  tick_interval_seconds: 60
+  
+  # Default personality mode schedules
+  # Format: periodic expression → role/mode mapping
+  schedules:
+    professional:
+      hours: [9, 10, 11, 12, 13, 14, 15, 16]   # 9am-5pm
+      priority: 5
+    casual:
+      hours: [18, 19, 20, 21]                     # 6pm-10pm
+      priority: 5
+    reflective:
+      hours: [22, 23, 0, 1]                       # 10pm-2am
+      priority: 5
+  
+  # Access tier temporal constraints
+  tier_schedules:
+    friends:
+      hours: [18, 19, 20, 21, 22, 23, 0, 1]      # evening+
+      priority: 3
+    close:
+      hours: [22, 23, 0, 1]                       # late night
+      priority: 2
+  
+  # Triggers (dependent activations)
+  # "Night-shift nurse enables when night-shift doctor enables"
+  triggers:
+    - name: "professional_enables_friends"
+      when: { mode_professional: "ENABLED" }
+      then: { enable: "tier_friends" }
+    - name: "reflective_from_casual_night"
+      when: { mode_casual: "ENABLED", mode_reflective: "ENABLED" }
+      then: { activate: "mode_reflective" }
+  
+  # Conflict resolution
+  # Rule 1: Higher priority overrides lower
+  # Rule 2: Negative (disable) overrides positive at same priority
+  conflict_resolution: "negative_takes_precedence"
