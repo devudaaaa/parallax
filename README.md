@@ -135,7 +135,7 @@ Python 3.10+ and one of: an Anthropic API key, an OpenAI API key, or [Ollama](ht
 ### Install
 
 ```bash
-git clone https://github.com/AdeAdio/parallax.git
+git clone https://github.com/leeladitya/parallax.git
 cd parallax
 
 pip install -r requirements.txt
