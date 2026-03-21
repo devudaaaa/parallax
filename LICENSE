@@ -1,21 +1,151 @@
-MIT License
+PARALLAX ENGINE — COLLECTIVE INTELLIGENCE LICENSE (CIL) v1.0
 
-Copyright (c) 2025-2026 Leela Aditya Annam / devudaaaa Research Lab
+Copyright (c) 2024-2026 devudaaaa Research Lab. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This is NOT an open-source license. This license must be explicitly
+accepted before any use of this software is permitted.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+By using, copying, modifying, or distributing this Software, you agree
+to ALL of the following terms. If you do not agree, you may not use
+this Software in any way.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+════════════════════════════════════════════════════════════════════════
+1. ACCEPTANCE REQUIRED
+════════════════════════════════════════════════════════════════════════
+
+This license is not automatically granted by accessing this repository.
+To obtain a license, you must:
+
+  (a) Register your use at devudaaaa.xyz/parallax/register.html, OR
+  (b) Send written notice to the devudaaaa Research Lab confirming
+      your acceptance of these terms.
+
+Viewing the source code for evaluation purposes is permitted.
+Any other use without acceptance constitutes infringement.
+
+════════════════════════════════════════════════════════════════════════
+2. GRANT OF USE — RESEARCH AND NON-COMMERCIAL
+════════════════════════════════════════════════════════════════════════
+
+Subject to acceptance, you are granted a non-exclusive, non-transferable,
+revocable license to:
+
+  (a) Use the Software for personal, academic, or research purposes;
+  (b) Modify the Software for your own use;
+  (c) Run the Software to process your own data;
+  (d) Publish research findings derived from using the Software,
+      provided proper attribution is given (see Section 4).
+
+════════════════════════════════════════════════════════════════════════
+3. COLLECTIVE INTELLIGENCE OBLIGATION
+════════════════════════════════════════════════════════════════════════
+
+This is the core obligation. In exchange for using the Parallax Engine,
+you agree to share back:
+
+  (a) INSIGHTS: Any findings, patterns, metrics, or observations
+      derived from running the Parallax Engine or its components
+      must be shared with the devudaaaa Research Lab community.
+      This includes but is not limited to:
+        - Divergence patterns between computational and human decisions
+        - Extension membership statistics across decision domains
+        - Belief state evolution data (anonymized)
+        - Novel argument structures or attack patterns discovered
+        - Performance benchmarks of the argumentation solver
+
+  (b) IMPROVEMENTS: If you modify the argumentation engine, sequential
+      decision model, or temporal engine in ways that improve accuracy,
+      performance, or capability, you must make those improvements
+      available to the devudaaaa Research Lab under this same license.
+
+  (c) FORMAT: Shared insights must be provided in a format usable by
+      the research community — either as published papers with proper
+      citation, as data submitted to devudaaaa.xyz, or as pull requests
+      to the official repository.
+
+  (d) ANONYMIZATION: You are NOT required to share personally
+      identifiable information. All shared data must be anonymized.
+      The obligation is to share patterns, not personal data.
+
+  (e) TIMING: Insights must be shared within 12 months of generation,
+      or upon publication of related research, whichever comes first.
+
+════════════════════════════════════════════════════════════════════════
+4. ATTRIBUTION
+════════════════════════════════════════════════════════════════════════
+
+Any use of this Software in published work must include:
+
+  (a) Citation of the Parallax Engine and devudaaaa Research Lab;
+  (b) A link to the official repository;
+  (c) The following acknowledgment:
+      "This work uses the Parallax Engine, developed by
+       devudaaaa Research Lab (devudaaaa.xyz)."
+
+════════════════════════════════════════════════════════════════════════
+5. COMMERCIAL USE
+════════════════════════════════════════════════════════════════════════
+
+Commercial use of the Parallax Engine or its components — including
+but not limited to integration into commercial products, SaaS platforms,
+consulting deliverables, or revenue-generating services — requires a
+separate Commercial License Agreement with devudaaaa Research Lab.
+
+The Collective Intelligence Obligation (Section 3) applies to commercial
+licensees in addition to any commercial license terms.
+
+Contact devudaaaa.xyz for commercial licensing inquiries.
+
+════════════════════════════════════════════════════════════════════════
+6. RESTRICTIONS
+════════════════════════════════════════════════════════════════════════
+
+You may NOT:
+
+  (a) Sublicense, sell, or redistribute the Software without written
+      consent from devudaaaa Research Lab;
+  (b) Use the Software to build a competing argumentation-based
+      decision engine without a commercial license;
+  (c) Remove or alter this license, copyright notices, or attribution
+      requirements;
+  (d) Represent the Software as your own work;
+  (e) Use the Software in any way that violates applicable law.
+
+════════════════════════════════════════════════════════════════════════
+7. INTELLECTUAL PROPERTY
+════════════════════════════════════════════════════════════════════════
+
+The Parallax Engine, its architecture (including but not limited to the
+three-layer Powell-Dung-ASPARTIX design, the faith-variable measurement
+methodology, the incomplete argumentation framework integration, and
+the sequential decision model), and all associated documentation are
+the intellectual property of devudaaaa Research Lab.
+
+Contributions submitted to the official repository are licensed back
+to devudaaaa Research Lab under these same terms, with the contributor
+retaining the right to use their own contributions.
+
+════════════════════════════════════════════════════════════════════════
+8. NO WARRANTY
+════════════════════════════════════════════════════════════════════════
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY.
+
+════════════════════════════════════════════════════════════════════════
+9. TERMINATION
+════════════════════════════════════════════════════════════════════════
+
+This license terminates automatically if you fail to comply with any
+of its terms, in particular the Collective Intelligence Obligation
+(Section 3). Upon termination, you must cease all use of the Software
+and destroy all copies in your possession.
+
+════════════════════════════════════════════════════════════════════════
+
+devudaaaa Research Lab
+devudaaaa.xyz
+"We don't add faith to the twin — we measure its absence."
