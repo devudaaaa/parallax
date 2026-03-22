@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallax Engine — Join the Collective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0f0d;
+    --surface: #111916;
+    --surface-2: #182420;
+    --border: rgba(160, 241, 189, 0.12);
+    --text: #e8efe9;
+    --text-dim: #7a9980;
+    --accent: #a0f1bd;
+    --accent-dim: rgba(160, 241, 189, 0.15);
+    --warm: #f4845f;
+    --gold: #d4a843;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND ─────────────────────────── */
+  .bg-grid {
+    position: fixed; inset: 0; z-index: 0; opacity: 0.03;
+    background-image:
+      linear-gradient(var(--accent) 1px, transparent 1px),
+      linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .bg-glow {
+    position: fixed; top: -30%; left: -20%; width: 140%; height: 100%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(160,241,189,0.06) 0%, transparent 50%);
+    z-index: 0; pointer-events: none;
+  }
+
+  /* ── LAYOUT ─────────────────────────────── */
+  .container {
+    position: relative; z-index: 1;
+    max-width: 760px; margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  /* ── HERO ───────────────────────────────── */
+  .hero-label {
+    font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s;
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif; font-size: clamp(42px, 7vw, 72px);
+    font-weight: 400; line-height: 1.05; letter-spacing: -2px;
+    color: var(--text); margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s;
+  }
+
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 18px; color: var(--text-dim); max-width: 580px;
+    line-height: 1.7; margin-bottom: 64px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  /* ── PHILOSOPHY SECTION ─────────────────── */
+  .philosophy {
+    border-left: 2px solid var(--accent);
+    padding: 28px 0 28px 28px; margin-bottom: 64px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .philosophy p {
+    font-family: 'Instrument Serif', serif; font-size: 22px;
+    line-height: 1.6; color: var(--text); font-style: italic;
+  }
+
+  .philosophy .attr {
+    font-family: 'DM Sans', sans-serif; font-style: normal;
+    font-size: 13px; color: var(--text-dim); margin-top: 16px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ── WHAT YOU GET / WHAT YOU GIVE ──────── */
+  .exchange {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin-bottom: 64px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+
+  @media (max-width: 600px) { .exchange { grid-template-columns: 1fr; } }
+
+  .exchange-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px;
+  }
+
+  .exchange-card h3 {
+    font-size: 14px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  .exchange-card.get h3 { color: var(--accent); }
+  .exchange-card.give h3 { color: var(--gold); }
+
+  .exchange-card ul { list-style: none; }
+
+  .exchange-card li {
+    padding: 8px 0; font-size: 15px; color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+
+  .exchange-card li:last-child { border-bottom: none; }
+  .exchange-card li::before { content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+  .exchange-card.give li::before { color: var(--gold); }
+
+  /* ── FORM ───────────────────────────────── */
+  .form-section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 48px; margin-bottom: 48px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 1.1s;
+  }
+
+  .form-section h2 {
+    font-family: 'Instrument Serif', serif; font-size: 32px;
+    font-weight: 400; margin-bottom: 8px;
+  }
+
+  .form-section .form-sub {
+    font-size: 15px; color: var(--text-dim); margin-bottom: 36px;
+  }
+
+  .field { margin-bottom: 24px; }
+
+  .field label {
+    display: block; font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 8px;
+  }
+
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 14px 18px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 16px;
+    outline: none; transition: border-color 0.3s;
+  }
+
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .field textarea { resize: vertical; min-height: 100px; }
+
+  .field select option { background: var(--surface-2); color: var(--text); }
+
+  .checkbox-field {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 24px; cursor: pointer;
+  }
+
+  .checkbox-field input[type="checkbox"] {
+    width: 20px; height: 20px; margin-top: 2px;
+    accent-color: var(--accent); flex-shrink: 0;
+  }
+
+  .checkbox-field span { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+  .checkbox-field a { color: var(--accent); }
+
+  .submit-btn {
+    width: 100%; padding: 18px 32px;
+    background: var(--accent); color: var(--bg);
+    border: none; border-radius: 12px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700;
+    letter-spacing: 0.5px; transition: all 0.3s;
+  }
+
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(160,241,189,0.25); }
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .success-msg {
+    display: none; text-align: center; padding: 40px;
+    background: var(--accent-dim); border-radius: 16px; margin-top: 24px;
+  }
+
+  .success-msg h3 { font-family: 'Instrument Serif', serif; font-size: 28px; margin-bottom: 12px; color: var(--accent); }
+  .success-msg p { font-size: 15px; color: var(--text-dim); }
+
+  /* ── FOOTER ─────────────────────────────── */
+  .footer {
+    text-align: center; padding-top: 48px;
+    border-top: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.8s ease forwards 1.3s;
+  }
+
+  .footer .telugu { font-size: 36px; margin-bottom: 12px; opacity: 0.6; }
+  .footer .tagline { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--text-dim); font-style: italic; }
+  .footer .org { font-size: 13px; color: var(--text-dim); margin-top: 16px; letter-spacing: 1px; opacity: 0.5; }
+
+  /* ── ANIMATIONS ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<div class="container">
+
+  <div class="hero-label">Parallax Engine — Collective Intelligence License</div>
+
+  <h1>Join a community that <em>measures</em> what machines can't replicate</h1>
+
+  <p class="hero-sub">
+    Parallax is not open-source. It's not closed either. It's a commitment.
+    You use the engine. You share what you discover. The collective understanding grows.
+    Everyone benefits.
+  </p>
+
+  <div class="philosophy">
+    <p>
+      Every time a human overrides a computational recommendation out of conviction —
+      that's a data point the world needs. Not your personal data. The pattern.
+      The shape of the gap between what algorithms predict and what humans actually do.
+    </p>
+    <div class="attr">The devudaaaa thesis</div>
+  </div>
+
+  <div class="exchange">
+    <div class="exchange-card get">
+      <h3>What you get</h3>
+      <ul>
+        <li>Full access to the Parallax Engine source code</li>
+        <li>Sequential Decision Model (Powell's framework)</li>
+        <li>Formal Argumentation Engine (Dung's AF + iAAF)</li>
+        <li>GTRBAC Temporal Engine</li>
+        <li>96 passing tests, production-grade architecture</li>
+        <li>Freedom to use for research, personal, and academic work</li>
+        <li>Access to the community's shared insight database</li>
+      </ul>
+    </div>
+    <div class="exchange-card give">
+      <h3>What you commit</h3>
+      <ul>
+        <li>Share anonymized findings within 12 months</li>
+        <li>Divergence patterns you discover</li>
+        <li>Novel argument structures or attack patterns</li>
+        <li>Performance improvements to the engine</li>
+        <li>Proper attribution in any published work</li>
+        <li>Never share personal data — only patterns</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Accept & Register</h2>
+    <p class="form-sub">Fill in your details. This opens your email client with a pre-filled registration message to the devudaaaa Research Lab.</p>
+
+    <form id="regForm" onsubmit="return handleSubmit(event)">
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="name" required placeholder="Your name">
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="field">
+        <label>Affiliation</label>
+        <input type="text" id="affiliation" placeholder="University, company, or independent researcher">
+      </div>
+
+      <div class="field">
+        <label>Intended Use</label>
+        <select id="use" required>
+          <option value="">Select your primary use case</option>
+          <option value="academic_research">Academic Research</option>
+          <option value="personal_project">Personal Project</option>
+          <option value="smart_home">Smart Home / IoT Application</option>
+          <option value="healthcare">Healthcare Decision Support</option>
+          <option value="finance">Finance / Investment Modeling</option>
+          <option value="education">Education / Learning Systems</option>
+          <option value="ai_safety">AI Safety / Ethics Research</option>
+          <option value="argumentation_research">Computational Argumentation Research</option>
+          <option value="other">Other (describe below)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Brief Description of Your Work</label>
+        <textarea id="description" placeholder="What will you build or study with the Parallax Engine? What insights do you expect to generate?"></textarea>
+      </div>
+
+      <div class="field">
+        <label>How Will You Share Insights?</label>
+        <select id="sharing" required>
+          <option value="">Select your preferred sharing method</option>
+          <option value="paper">Published Research Paper</option>
+          <option value="data_submission">Data Submission to devudaaaa.xyz</option>
+          <option value="pull_request">Pull Request to the Repository</option>
+          <option value="blog">Blog Post / Technical Write-up</option>
+          <option value="multiple">Multiple Methods</option>
+        </select>
+      </div>
+
+      <label class="checkbox-field">
+        <input type="checkbox" id="accept_license" required>
+        <span>
+          I have read and accept the <a href="https://github.com/devudaaaa/parallax/blob/main/LICENSE" target="_blank">Collective Intelligence License v1.0</a>.
+          I commit to sharing anonymized insights from my use of the Parallax Engine within 12 months.
+        </span>
+      </label>
+
+      <label class="checkbox-field">
+        <input type="checkbox" id="accept_attribution" required>
+        <span>
+          I will attribute devudaaaa Research Lab and the Parallax Engine in any published work or public use.
+        </span>
+      </label>
+
+      <button type="submit" class="submit-btn" id="submitBtn" disabled>Send Registration via Email</button>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <h3>Email Ready</h3>
+      <p>Your email client should have opened with the registration message.<br>Send it to complete your registration. Welcome to the collective.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="telugu">దేవుడా!</div>
+    <div class="tagline">"We don't add faith to the twin — we measure its absence."</div>
+    <div class="org">devudaaaa Research Lab · devudaaaa.xyz · 2026</div>
+  </div>
+
+</div>
+
+<script>
+  // Enable submit only when both checkboxes are checked
+  const chk1 = document.getElementById('accept_license');
+  const chk2 = document.getElementById('accept_attribution');
+  const btn = document.getElementById('submitBtn');
+
+  function updateBtn() {
+    btn.disabled = !(chk1.checked && chk2.checked);
+  }
+  chk1.addEventListener('change', updateBtn);
+  chk2.addEventListener('change', updateBtn);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const affiliation = document.getElementById('affiliation').value.trim();
+    const use = document.getElementById('use').value;
+    const description = document.getElementById('description').value.trim();
+    const sharing = document.getElementById('sharing').value;
+
+    const useLabels = {
+      academic_research: 'Academic Research',
+      personal_project: 'Personal Project',
+      smart_home: 'Smart Home / IoT Application',
+      healthcare: 'Healthcare Decision Support',
+      finance: 'Finance / Investment Modeling',
+      education: 'Education / Learning Systems',
+      ai_safety: 'AI Safety / Ethics Research',
+      argumentation_research: 'Computational Argumentation Research',
+      other: 'Other',
+    };
+
+    const shareLabels = {
+      paper: 'Published Research Paper',
+      data_submission: 'Data Submission to devudaaaa.xyz',
+      pull_request: 'Pull Request to the Repository',
+      blog: 'Blog Post / Technical Write-up',
+      multiple: 'Multiple Methods',
+    };
+
+    const subject = encodeURIComponent(`Parallax CIL Registration — ${name}`);
+
+    const body = encodeURIComponent(
+`PARALLAX ENGINE — COLLECTIVE INTELLIGENCE LICENSE REGISTRATION
+${'═'.repeat(60)}
+
+I hereby accept the Collective Intelligence License v1.0 for the Parallax Engine
+and commit to sharing anonymized insights from my use within 12 months.
+
+REGISTRANT DETAILS
+${'─'.repeat(40)}
+Name:         ${name}
+Email:        ${email}
+Affiliation:  ${affiliation || 'Not specified'}
+Intended Use: ${useLabels[use] || use}
+
+DESCRIPTION OF WORK
+${description || 'Not provided'}
+
+INSIGHT SHARING METHOD
+${shareLabels[sharing] || sharing}
+
+COMMITMENTS
+${'─'.repeat(40)}
+[✓] I accept the Collective Intelligence License v1.0
+[✓] I will attribute devudaaaa Research Lab in any published work
+[✓] I will share anonymized insights within 12 months
+[✓] I will not share personal data — only patterns
+
+${'─'.repeat(40)}
+Submitted: ${new Date().toISOString()}
+Parallax Engine — devudaaaa Research Lab
+devudaaaa.xyz
+`
+    );
+
+    const mailto = `mailto:omg@devudaaaa.xyz?cc=research@leed.guru&subject=${subject}&body=${body}`;
+
+    window.location.href = mailto;
+
+    // Show success message
+    document.getElementById('regForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+
+    return false;
+  }
+</script>
+
+</body>
+</html>

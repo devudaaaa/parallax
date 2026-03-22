@@ -1,204 +1,265 @@
-# Parallax
+<div align="center">
 
-### A generative agent of one.
+# PARALLAX
 
----
+### A Generative Agent of One
 
-*In astronomy, parallax is the apparent displacement of an object when observed from two different positions. The greater the distance between viewpoints, the more precise the measurement.*
+*Measuring what computation cannot replicate about human decision-making*
 
-*This project creates two viewpoints of the same person: a computational model built from their actual data, and the person themselves. The displacement between what the model decides and what the human decides is the measurement.*
+![Status](https://img.shields.io/badge/version-2.0--alpha-58B09C?style=flat-square)
+![License](https://img.shields.io/badge/license-CIL%20v1.0-D4A843?style=flat-square)
+![Tests](https://img.shields.io/badge/tests-96%20passing-58B09C?style=flat-square)
+![Privacy](https://img.shields.io/badge/privacy-CLAW%20enforced-F4845F?style=flat-square)
 
-*That measurement is the research.*
-
----
-
-## The Landscape
-
-In 2023, a team at Stanford introduced **generative agents** — computational software agents that simulate believable human behavior by combining large language models with memory, reflection, and planning (Park et al., UIST'23). Twenty-five agents woke up, cooked breakfast, formed opinions, and initiated conversations in a simulated town. The work won best paper and launched a field.
-
-That team went further. They conducted two-hour qualitative interviews with over 1,000 real people and built generative agents that replicated those individuals' survey responses with 85% of the accuracy that the real people achieved when re-tested two weeks later (Park et al., 2024). For the first time, AI agents could meaningfully stand in for real humans in social science research.
-
-The commercial venture born from this work, **Simile**, is now building a foundation model for predicting human behavior at any scale — from earnings call rehearsals to policy simulations to entire societies.
-
-**Parallax** lives in the same intellectual tradition, but asks a fundamentally different question.
-
-Where genagents simulates **1,000 people with breadth**, Parallax models **one person with depth**. Where Simile predicts what populations *will* do, Parallax measures what one individual *actually* does — and studies the displacement between prediction and reality.
-
-That displacement — small in routine decisions, large in moments of genuine moral or existential weight — is a signal. It maps the boundary of what computation can replicate about human decision-making, and what it cannot.
+**[Register to Use](https://devudaaaa.xyz/parallax/register) · [devudaaaa Research Lab](https://devudaaaa.xyz) · [CHANGELOG](CHANGELOG.md)**
 
 ---
 
-## The Question
+*When algorithms can predict your next purchase, your next click, your next relationship —*
+*what's left that's irreducibly yours?*
 
-Here is the observation that motivates this work:
-
-You can build a remarkably faithful model of how a person communicates, reasons, and remembers. Modern LLMs, grounded in real personal data, can replicate someone's writing style, decision patterns, and emotional register with surprising accuracy.
-
-But there is a category of decision where the model hesitates.
-
-Not factual questions. Not optimization problems. The other kind — where competing values collide, where evidence is genuinely ambiguous, where rational calculus doesn't resolve, and yet the real person acts with conviction.
-
-The model says: *I'm 43% confident. Both options have merit.*
-
-The person says: *I know what to do.*
-
-Sometimes that conviction comes from experience too deep to articulate. Sometimes from cultural intuition. Sometimes from what different traditions have called conscience, inner voice, or faith.
-
-Parallax doesn't name it. It **measures** it — by building the most complete logical replica of an individual that current technology allows, and systematically studying every moment where the real person diverges from that replica.
-
-Each divergence is a data point. Over time, the data points become a signal. The signal maps a boundary.
+</div>
 
 ---
 
-## How It Works
+## The Question That Started This
 
-The architecture follows four layers, each grounded in a specific lineage in simulation research.
+Imagine you're facing a decision. You've analyzed the data. The spreadsheet says no. The probability is below 45%. Every rational framework points to decline.
 
-### Perception — *What the agent knows about you*
+But you do it anyway. And sometimes, it works.
 
-Before a generative agent can model you, it must perceive your world. Following the principle that believable agents require grounding in rich, specific data (Bates 1994), the data pipeline ingests your actual digital footprint:
+That gap — where logic says *no* but conviction says *yes* — is what Parallax studies. Not by trying to model faith or intuition (we can't). But by building a computational version of you that follows pure logic, and then measuring every moment where the real you disagrees.
 
-**Messages** — Slack exports, WhatsApp conversations, Discord logs. Parsed with timestamps, speaker identification, and a timeline of how you communicate with different people at different times.
+**The divergence IS the data.**
 
-**Documents** — PDFs, notes, source code, research papers. Chunked, analyzed for topic and formality, and tagged with an authorization tier that determines who the agent can share it with.
+We call it the faith variable. You might call it gut feeling, intuition, or conviction. The Telugu word for it is **దేవుడా** (*devudaaaa!*) — the cry to god when stakes are high and logic has run out.
 
-**Photos** — Described by a vision model for content, context, mood, and significance. EXIF metadata adds where and when.
+Parallax doesn't try to explain it. Parallax measures its shape.
 
-Everything flows through a style analyzer that measures your actual communication fingerprint: sentence length distributions, vocabulary richness, formality range, humor frequency, tone patterns across contexts. Not a personality quiz — a statistical profile built from your own words.
+---
 
-The output is a vector database (ChromaDB) where every piece of your digital life is embedded, searchable, and access-controlled — the agent's equivalent of what Park et al. call the **memory stream**.
+## Explain It Like I'm In High School
 
-### Cognition — *How the agent reasons*
+You have a twin. Not a physical twin — a computer program that thinks exactly like you. It reads your messages, learns your style, knows your values, understands how you make decisions. It's scarily accurate.
 
-The cognitive core implements three subsystems, drawing from the tradition of cognitive architectures (Newell 1990, Soar) that model the mind as interacting components:
+Now, you and your twin both face the same question: *"Should I take this risk?"*
 
-**Personality Engine** — Generates dynamic behavioral instructions from your real communication profile. Not "you are helpful and friendly" — more like "you use 23% more analytical language in professional contexts, drop formality by 40% after 9 PM, and default to Socratic questioning when you disagree." Adapts based on who the agent is talking to, what time it is, and what access tier the conversation falls under.
+Most of the time, you agree. That's expected.
 
-**Reasoning Engine** — When the agent faces a structured decision, it uses argumentation-based reasoning grounded in Dung's (1995) framework: generating arguments for and against, identifying attack and support relations between claims, computing acceptable argument sets, and producing a confidence score. Every decision is logged. Every confidence score is recorded. When confidence drops below 45%, the system flags that moment as one where logic alone wasn't enough. *(See [VISION.md](VISION.md) for how this connects to the AGORA multi-constitutional debate framework.)*
+But sometimes, your twin says *"The math doesn't work, I'd say no"* — and you say *"I'm doing it anyway."* And sometimes you're right.
 
-**Memory System** — Retrieval-augmented generation over your personal vector store, with authorization-aware filtering. The agent recalls what's relevant, respects what's private, and builds conversational context across interactions — grounded in *your real data* rather than synthetic personas.
+Those moments are what Parallax collects. Not your personal decisions (those stay private). The **patterns**. How often does it happen? In what kinds of situations? At what time of day? When you're alone vs. with people?
 
-### Temporality — *When the agent shifts behavior*
+**"But wait — how do you keep my stuff private?"**
 
-Most AI agents exist outside of time. They respond identically at 3 PM and 3 AM, to a stranger and a close friend.
+Parallax integrates the PII detection and redaction pipeline from [Claw](https://github.com/Leeladitya/claw), our AI governance engine. Before any insight leaves your machine — before it enters the collective — Claw's scanner strips emails, phone numbers, names, SSNs, financial details, and anything else that could identify you. What remains is the pattern, not the person. Your twin knows you. The community knows patterns. Nobody knows both.
 
-Humans don't work that way. You're sharper in the morning, more reflective at night, more guarded with acquaintances, more honest with people you trust. These rhythms aren't random — they follow temporal patterns that are principled and measurable.
+Over time, across many people, those patterns map something real: **the boundary between what computers can predict and what they can't.**
 
-Parallax's temporal engine implements this using a formal constraint system based on periodic time expressions (Bertino et al. 1998) and the Generalized Temporal Role-Based Access Control model (Joshi et al. 2005). Every 60 seconds, the engine evaluates all active constraints and transitions the agent's behavioral state through a formal state machine:
+---
+
+## Explain It Like I'm a Researcher
+
+Parallax is a single-subject generative agent research instrument implementing three formally grounded layers:
+
+### Layer 1: Sequential Decision Analytics (Powell 2022)
+
+Every decision is a step in a sequential process with five components:
+
+| Component | Parallax Implementation |
+|-----------|------------------------|
+| **State S_t** | Personality profile + Bayesian belief state + decision history + GTRBAC temporal mode |
+| **Decision x_t** | Output from the formal argumentation layer |
+| **Exogenous info W_{t+1}** | Human's actual choice + decision outcome + environmental changes |
+| **Transition S^M** | Belief update (divergence-weighted), history append, VFA learning |
+| **Objective F(π)** | Rational expected value (twin) vs. unknown objective (human) — the gap is the signal |
+
+Powell's four policy classes map to:
+- **PFA** → Personality rules generating CERTAIN arguments
+- **CFA** → Preference orderings in ASPARTIX PAF/VAF format
+- **VFA** → Learning from past divergence patterns
+- **DLA** → The argumentation engine itself (lookahead over extensions)
+
+### Layer 2: Abstract Argumentation (Dung 1995 + Fazzinga et al. 2026)
+
+Each decision scenario becomes an Incomplete Abstract Argumentation Framework:
 
 ```
- 06:00  ·  default mode, public tier
- 09:00  ·  professional mode, colleagues tier
- 18:00  ·  casual mode, friends tier
- 22:00  ·  reflective mode, close tier
- 03:00  ·  quiet — system returns to default
+iAAF = ⟨A, A?, D, D?⟩
+
+A   = Certain arguments (from personality rules, user statements)
+A?  = Uncertain arguments (from LLM inference, world observations)
+D   = Certain attacks (known contradictions)
+D?  = Uncertain attacks (inferred contradictions)
 ```
 
-This is a full state machine with conflict resolution (higher priority overrides lower; negative-takes-precedence at equal priority), dependent triggers (professional mode can automatically enable colleagues tier), and composable periodic expressions that can represent any recurring temporal pattern.
+The engine computes grounded (fixpoint of F_AF), preferred (maximal admissible), and stable extensions with i\*-extension verification — polynomial under ad, st, co, gr semantics (Fazzinga et al. Theorem 1).
 
-The formalism ensures transitions are auditable, configurable, and grounded in published access control theory — not ad-hoc heuristics.
+**Critical design choice:** the LLM generates arguments. It does NOT evaluate them. Evaluation is formally computed. The confidence score is extension membership status, not an LLM's guess.
 
-### Interaction — *Where the agent meets the world*
+### Layer 3: Temporal Access Control (GTRBAC)
 
-The agent participates in real environments through:
+The twin's behavioral mode shifts on a clock — professional at 9am, casual at 6pm, reflective at 10pm. The GTRBAC engine (Joshi et al. 2005) implements the full Disabled → Enabled → Active lifecycle. A divergence at 3am means something different than a divergence at 2pm. The temporal engine captures this.
 
-**Messaging Platforms** — Slack and Discord integrations with human-like response timing, typing indicators, and context-aware behavior that respects temporal state and authorization tiers.
+### Privacy Layer: Claw Integration
 
-**REST API & WebSocket** — Full programmatic access for sending messages, requesting structured decisions, querying memory, checking temporal state, and streaming real-time interactions.
+Parallax imports the PII detection and automatic redaction module from the [Claw governance engine](https://github.com/Leeladitya/claw). This operates at every data boundary — between the user and the twin, between storage and research export. All personally identifiable information is stripped before divergence patterns are recorded. The collective intelligence pipeline is architecturally incapable of containing personal data because it was destroyed before the pattern was ever stored.
 
-**Divergence Tracker** — Silently records every decision the agent makes, then waits for you to log what *you* actually decided. Over time, this builds the longitudinal dataset that drives the research.
+Claw itself is a full 6-stage AI governance pipeline (PII scanning → policy gate → knowledge hub → argumentation-based conflict resolution → context assembly → model inference). In Parallax, we use its PII and redaction capabilities specifically to guarantee anonymity in shared research data.
 
 ---
 
-## The Research
+## What Can You Build With This?
 
-The methodology follows the tradition of agent-based modeling (Epstein & Axtell 1996) combined with the emerging field of generative agent simulation (Park et al. 2023, 2024):
+Parallax is a research instrument, but the components are modular. Here's what's possible — and we'd love to see what the community invents.
 
-**Build the most complete logical model** of a single individual that current technology allows.
+### Smart Home Preference Engines
 
-**Present that model with real decisions.** Not trivia — genuine dilemmas where the optimal choice is ambiguous, where values compete, where computation alone cannot resolve.
+Every household has preference conflicts. Temperature, lighting, music, energy usage — people disagree. Current smart home systems average preferences into mediocrity. Parallax's argumentation framework can model each person's preferences as arguments, conflicts as attacks, and compute the extension that formally resolves the dispute. When someone overrides, that's a data point the system learns from. **Build a Home Assistant plugin. Build a Google Home middleware. Build the smart home that actually understands your household.**
 
-**Record both responses.** What the model chose and what the human chose, with full reasoning chains, confidence scores, temporal context, and the complete argumentation graph.
+### Clinical Decision Support
 
-**Study the displacement.** Particularly where the model's confidence was low and the human acted with conviction anyway. Those moments map the boundary between computational and non-computational decision-making.
+Treatment choices involve value conflicts — effectiveness vs. quality of life, risk tolerance vs. caution, patient preference vs. clinical evidence. These aren't just data problems; they're argumentation problems. Model clinical evidence as arguments, patient values as preference orderings, and compute which treatment options survive under the patient's own value system. **Build a tool that structures shared decision-making, not one that replaces the doctor.**
 
-The divergence tracker classifies data points by category, computes signal strength, and builds a longitudinal dataset. When enough decisions accumulate, the analysis becomes publishable. This project is an instrument of the **devudaaaa research lab** (devudaaaa.xyz) — see [VISION.md](VISION.md) for how it connects to the lab's broader research program.
+### Investor Behavior Modeling
+
+When a human holds a stock against every quantitative signal, that's a faith-variable decision. Parallax can model investment reasoning as an AF, compute the rational recommendation, and track overrides. Over time, the patterns reveal something no risk questionnaire captures: *when* and *why* people trust conviction over computation. **Build a behavioral analytics layer for any trading platform. Build the anti-robo-advisor.**
+
+### Learning Path Personalization
+
+A student picks art history over computer science despite every career optimizer saying otherwise. That divergence isn't irrational — it's where intrinsic motivation lives. Track how student decisions diverge from recommended paths. The pattern reveals genuine interest, not compliance. **Build an LMS plugin that detects real engagement by measuring where students override algorithmic recommendations.**
+
+### Autonomous System Handoff Analysis
+
+When a human takes manual control from an autonomous system — car, drone, factory robot — that override contains information. Across thousands of handoffs, the pattern reveals what humans perceive that sensors don't. **Build a handoff analytics pipeline for any autonomous system. The argumentation framework models the conflict between sensor logic and human intuition.**
+
+### Legal Argumentation Support
+
+Legal disputes are argumentation frameworks by nature. Model each party's arguments, identify attack relations, compute extensions under different semantics. The grounded extension shows what survives skeptical analysis. The preferred extensions show defensible alternatives. **Build a case analysis tool. Build a plea negotiation simulator. Build a regulatory compliance checker.**
+
+### Negotiation Engines
+
+Any multi-party negotiation has conflicting arguments. Labor disputes, contract terms, international agreements. The argumentation framework provides formal structure. The divergence tracker shows where parties override formal recommendations — revealing their true priorities, not their stated ones. **Build a negotiation support system for any domain where parties disagree.**
+
+### Personal Journaling / Self-Reflection Tools
+
+Give someone a private twin that models their stated values and tracks when their actual decisions diverge. No sharing, no collective — just personal insight. "You say you prioritize health, but you override health-related recommendations 80% of the time after 9pm." **Build a self-awareness tool. Build the mirror that reflects patterns, not faces.**
+
+The point: **Parallax gives you the formal machinery. What you build with it is yours.** We just ask that you share the anonymized patterns back, so the collective understanding grows.
+
+---
+
+## Why Collective Intelligence?
+
+One person's divergence data is anecdotal. A thousand people's divergence data is a research breakthrough.
+
+If you run Parallax on your investment decisions and discover that you override the system 70% of the time when your family is involved — that's interesting for you. But if 500 people show the same pattern, we've measured something real about how kinship bonds override financial optimization. That's publishable. That's actionable. That's knowledge that didn't exist before.
+
+**The Collective Intelligence License is not a restriction. It's the mechanism that makes this possible.**
+
+You use the engine. You discover patterns. You share those patterns (anonymized — Claw-enforced, not just promised). The collective dataset grows. New researchers build on it. The understanding deepens. You benefit from everyone else's contributions too.
+
+This isn't altruism. It's the same logic as open science: science works because results are shared. Parallax works because patterns are shared.
+
+### What you share:
+- Divergence patterns (how often, in what domains, under what conditions)
+- Novel argument structures or attack patterns you discover
+- Performance improvements to the engine
+- Research findings in published work (with attribution)
+
+### What you never share (Claw enforces this):
+- Personal decisions or private data
+- Identifying information about yourself or others
+- Raw data that could be de-anonymized
+
+### What you get back:
+- Access to the collective insight database
+- Patterns from hundreds of other users' domains
+- The most comprehensive dataset of human conviction-based behavior ever assembled
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+- Python 3.10+
+- `pip install pytest loguru pyyaml`
 
-Python 3.10+ and one of: an Anthropic API key, an OpenAI API key, or [Ollama](https://ollama.ai) for fully offline operation.
-
-### Install
+### Run the Tests
 
 ```bash
-git clone https://github.com/leeladitya/parallax.git
+git clone https://github.com/devudaaaa/parallax.git
 cd parallax
-
-pip install -r requirements.txt
-
-cp .env.example .env
-# Add your API key(s) to .env
+python -m pytest tests/test_temporal.py tests/test_sequential.py tests/test_argumentation.py -v
+# → 96 passed
 ```
 
-### Feed it your data
+### Your First Decision
 
-Export your digital footprint into `data/raw/`:
+```python
+from argumentation.framework import *
 
-```
-data/raw/
-├── messages/       # Slack JSON, WhatsApp .txt, Discord exports
-├── documents/      # PDFs, .docx, .md, source code, research papers
-└── photos/         # Images (EXIF metadata preserved if available)
-```
+# Build an argumentation framework for a decision
+proceed = Argument.create("Market timing is good", source=ArgumentSource.LLM_GENERATED, direction="for")
+family  = Argument.create("Family needs stability", source=ArgumentSource.PERSONALITY_RULE, direction="against")
+belief  = Argument.create("I believe in the team",  source=ArgumentSource.USER_STATED, direction="for")
 
-### Run the pipeline
+af = DungAF(
+    arguments={proceed, family, belief},
+    attacks={Attack(attacker=family.id, target=proceed.id, reason="Stability concern undermines risk-taking")}
+)
 
-```bash
-python -m phase1_data_pipeline.run_pipeline
-```
-
-### Talk to your agent
-
-```bash
-python -m phase2_logic_twin.twin
+# Compute: what survives formal evaluation?
+grounded = af.grounded_extension()
+# → family and belief survive (proceed is attacked, belief is unattacked)
 ```
 
-| Command | What it does |
-|---|---|
-| `/tier public\|friends\|close\|private` | Set who the agent thinks it's talking to |
-| `/decide <question>` | Structured decision with argumentation + confidence |
-| `/temporal` | Show the temporal engine state |
-| `/tick` | Force a temporal constraint evaluation |
-| `/status` | Full system diagnostics |
+---
 
-### Launch the platform
+## The Architecture
 
-```bash
-python -m phase4_platform.api.server
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     PARALLAX ENGINE v2                       │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   ┌─────────────────────────────────────────────────────┐   │
+│   │         POWELL SEQUENTIAL DECISION LAYER             │   │
+│   │   State → Policy → Decision → Outcome → Transition  │   │
+│   │                                                     │   │
+│   │   ┌─────────────────────────────────────────────┐   │   │
+│   │   │      DUNG ARGUMENTATION LAYER                │   │   │
+│   │   │   Arguments → Attacks → Extensions → Choice  │   │   │
+│   │   │                                             │   │   │
+│   │   │   ┌─────────────────────────────────────┐   │   │   │
+│   │   │   │    GTRBAC TEMPORAL ENGINE            │   │   │   │
+│   │   │   │  Time-aware behavioral modes        │   │   │   │
+│   │   │   └─────────────────────────────────────┘   │   │   │
+│   │   └─────────────────────────────────────────────┘   │   │
+│   └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│   ╔═════════════════════════════════════════════════════╗   │
+│   ║          CLAW PII REDACTION (imported)              ║   │
+│   ║   Strips all identifiable data before storage       ║   │
+│   ║   and before any insight enters the collective      ║   │
+│   ╚═════════════════════════════════════════════════════╝   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-API reference at `localhost:8000/docs`:
+---
 
-| Endpoint | Purpose |
-|---|---|
-| `POST /api/v1/chat` | Conversational interaction |
-| `POST /api/v1/decide` | Structured decision with reasoning chain |
-| `POST /api/v1/decide/record` | Log what *you* actually decided |
-| `GET /api/v1/temporal/status` | Current clock state and active modes |
-| `GET /api/v1/temporal/schedule` | Preview the next 24 hours |
-| `GET /api/v1/divergence` | Research analytics |
+## Academic References
 
-### Verify the temporal engine
-
-```bash
-python tests/test_temporal.py
-```
-
-10 tests validate periodic expressions, the role state machine, conflict resolution, trigger dependencies, and the default behavioral policy.
+| Paper | Year | Role in Parallax |
+|-------|------|-----------------|
+| Dung, *On the Acceptability of Arguments*. AI 77 | 1995 | Grounded, preferred, stable extension semantics |
+| Powell, *Sequential Decision Analytics*. Princeton | 2022 | State, transition, four policy classes |
+| Fazzinga et al., *Revisiting iAAFs*. AI 354 | 2026 | Incomplete AF, i*-extensions, polynomial verification |
+| Alfano et al., *Extending AAFs with Knowledge Bases*. KR | 2025 | Metadata-enriched arguments, KAF design |
+| Joshi et al., *GTRBAC*. IEEE TKDE | 2005 | Temporal access control engine |
+| Park et al., *Generative Agents*. UIST'23 | 2023 | Parallax inverts their approach: depth over breadth |
+| Craandijk & Toni, *DL for Abstract Argumentation*. IJCAI | 2020 | Future GNN-based VFA policy (Phase 5+) |
 
 ---
 
@@ -206,78 +267,55 @@ python tests/test_temporal.py
 
 ```
 parallax/
+├── sequential/                  ← Powell's Sequential Decision Framework
+│   ├── state.py                    BeliefState, DecisionHistory, ResourceState
+│   ├── transition.py               S_{t+1} = S^M(S_t, x_t, W_{t+1})
+│   └── model.py                    SequentialDecisionModel orchestrator
 │
-├── phase1_data_pipeline/            # Perception
-│   ├── ingestors/                   #   Message, document, photo parsers
-│   ├── processors/                  #   Style extraction, tone analysis
-│   ├── embeddings/                  #   Sentence transformer embeddings
-│   └── vector_store/                #   ChromaDB with auth-aware retrieval
+├── argumentation/               ← Dung's Formal Argumentation
+│   └── framework.py                DungAF, IncompleteAF (iAAF), DecisionEvaluator
 │
-├── phase2_logic_twin/               # Cognition
-│   ├── twin_core/
-│   │   ├── personality.py           #   Dynamic personality from real data
-│   │   ├── reasoning.py             #   Argumentation-based decisions
-│   │   └── memory.py                #   RAG memory with access control
-│   ├── twin.py                      #   Agent orchestrator + CLI
-│   └── fine_tuning/                 #   Training data formatters
-│
-├── temporal_engine/                 # Temporality
-│   ├── calendars.py                 #   Periodic expressions (Bertino 1998)
-│   ├── engine.py                    #   GTRBAC state machine + triggers
-│   └── __init__.py                  #   Default behavioral policy
-│
-├── phase4_platform/                 # Interaction
-│   ├── api/                         #   FastAPI with REST + WebSocket
-│   ├── connectors/                  #   Slack, Discord integrations
-│   └── measurement/                 #   Divergence tracker
-│
-├── VISION.md                        # Research roadmap + lab integration
-├── tests/                           # Temporal engine test suite
-├── config.yaml                      # Schedules, tiers, personality config
-└── requirements.txt
+├── temporal_engine/             GTRBAC temporal access control (16 tests)
+├── phase1_data_pipeline/        Data ingestion + embeddings + ChromaDB
+├── phase2_logic_twin/           Twin core: reasoning, personality, memory
+├── phase4_platform/
+│   └── measurement/             Divergence tracker
+├── tests/                       96 tests (temporal + sequential + argumentation)
+├── docs/
+│   └── register.html            CIL license acceptance + registration
+├── LICENSE                      Collective Intelligence License v1.0
+└── CHANGELOG.md                 Version history
 ```
 
 ---
 
-## Intellectual Foundations
+## License: Collective Intelligence License v1.0
 
-| Concept | Source | Role in Parallax |
-|---|---|---|
-| Generative agents | Park et al. (UIST 2023) | Architecture: memory stream + reflection + planning |
-| Simulating real people | Park et al. (2024), 1000 agents | Methodology: grounding agents in real individual data |
-| Cognitive architectures | Newell (1990), Soar, CoALA (Sumers et al. 2024) | Subsystem design: perception → cognition → action |
-| Believability | Bates (1994) | Design goal: the agent should *feel* like the person |
-| Bottom-up simulation | Schelling (1978), Epstein & Axtell (1996) | Philosophy: complex behavior emerges from individuals |
-| Wicked problems | Rittel & Webber (1973) | Motivation: some problems resist optimization |
-| Argumentation frameworks | Dung (1995) | Reasoning engine: structured argument evaluation |
-| Multi-constitutional AI | Annam (2025), Vedic-ABA framework | Vision: cross-cultural behavioral modeling via AGORA |
-| Periodic time formalism | Bertino et al. (1998) | Temporal constraint expressions |
-| Temporal access control | Joshi et al. (2005), GTRBAC | State machine for behavioral mode transitions |
-| Network dynamics | Chang et al. (2021) | Future: agent participation in network simulations |
-| Ethics of simulation | Wang et al. (2024), Santurkar et al. (2023) | Boundaries: what simulation can and cannot represent |
-| Generative ghosts | Morris & Brubaker (2024) | Ethical framing: modeling real people responsibly |
-| Simulation schema | NetLogo (Wilensky), D3 (Bostock et al. 2011) | Design inspiration for composable agent definitions |
+**This is not open source. This is not closed source. This is a commitment.**
+
+| ✅ You CAN | ❌ You CANNOT |
+|-----------|-------------|
+| Use for research, personal, academic work | Use commercially without a separate agreement |
+| Modify for your own use | Build a competing product without a license |
+| Publish findings (with attribution) | Remove attribution or license notices |
+| Access the collective insight database | Redistribute without consent |
+
+**The one obligation:** share anonymized insights within 12 months.
+
+**The one guarantee:** Claw's PII redaction ensures what you share is structurally incapable of containing personal data.
+
+**[Accept the license and register →](https://devudaaaa.xyz/parallax/register)**
 
 ---
 
-## Ethics
+<div align="center">
 
-**This models you, not others.** The data pipeline only processes data you explicitly export. No scraping, no inference about other people, no surveillance.
+**devudaaaa Research Lab**
 
-**Privacy by architecture.** All data stays local. LLM API calls are replaceable with local Ollama for fully offline operation. The four-tier authorization system ensures the agent never reveals information above the caller's clearance.
+[devudaaaa.xyz](https://devudaaaa.xyz) · [GitHub](https://github.com/devudaaaa) · [Claw](https://github.com/Leeladitya/claw)
 
-**Not a replacement.** Following Wang et al. (2024), language models cannot fully portray identity groups or replace human participants. Parallax is a research instrument, not a product that pretends to be you.
+*"We don't add faith to the twin — we measure its absence."*
 
-**Not a ghost.** Morris & Brubaker (2024) explore ethical implications of AI systems that model individuals beyond their lifetime. Parallax is designed for use by the living person it models — a mirror, not a memorial.
+**దేవుడా!**
 
-**Consent is structural.** You control what goes in, who talks to it, and what tier they see. No one else can create an agent of you.
-
----
-
-<p align="center">
-<strong>Parallax</strong> — a generative agent for studying human decision-making<br/>
-An instrument of the <a href="https://devudaaaa.xyz">devudaaaa research lab</a><br/>
-<br/>
-<em>The displacement between the model and the person is the measurement.<br/>
-The measurement is the research.</em>
-</p>
+</div>
