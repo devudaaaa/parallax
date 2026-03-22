@@ -11,7 +11,7 @@
 ![Tests](https://img.shields.io/badge/tests-96%20passing-58B09C?style=flat-square)
 ![Privacy](https://img.shields.io/badge/privacy-CLAW%20enforced-F4845F?style=flat-square)
 
-**[Register to Use](https://devudaaaa.xyz/parallax/register) · [devudaaaa Research Lab](https://devudaaaa.xyz) · [CHANGELOG](CHANGELOG.md)**
+**[Register to Use](https://devudaaaa.xyz/parallax/register.html) · [devudaaaa Research Lab](https://devudaaaa.xyz) · [CHANGELOG](CHANGELOG.md)**
 
 ---
 
@@ -304,7 +304,7 @@ parallax/
 
 **The one guarantee:** Claw's PII redaction ensures what you share is structurally incapable of containing personal data.
 
-**[Accept the license and register →](https://devudaaaa.xyz/parallax/register)**
+**[Accept the license and register →](https://devudaaaa.xyz/parallax/register.html)**
 
 ---
 
